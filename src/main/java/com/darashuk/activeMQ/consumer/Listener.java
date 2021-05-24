@@ -14,8 +14,8 @@ public class Listener {
 //        System.out.println("Receved message " + message);
 //    }
 
-//    @JmsListener(destination = "music_player_queue")
-//    public void createConsumerJson(Click click){
-//        log.info(click+" receved");
-//    }
+    @JmsListener(destination = "music_player_queue")
+    public void createConsumerJson(Click click){
+        log.info(click+" receved");
+    }
 }

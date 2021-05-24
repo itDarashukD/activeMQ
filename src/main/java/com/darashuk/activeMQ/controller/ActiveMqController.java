@@ -4,6 +4,7 @@ import com.darashuk.activeMQ.entity.Click;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ public class ActiveMqController {
         Click click = new Click( );
         click.setCount(11);
         click.setName(message);
-        jmsTemplate.convertAndSend("music_player_queue", click);
-        return "Ok!";
+        jmsTemplate.convertAndSend(queue, click);
+        return "send is Ok!" + message;
     }
 }
