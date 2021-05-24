@@ -1,5 +1,6 @@
 package com.darashuk.activeMQ.controller;
 
+import com.darashuk.activeMQ.entity.Click;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
@@ -20,9 +21,14 @@ public class ActiveMqController {
     @Autowired
     private Queue queue;
 
-    @GetMapping(value = "/{message}",produces = "text/html")
-    public String publish(@PathVariable("message")final String message) {
-        jmsTemplate.convertAndSend(queue, message);
-        return "Is published!";
+
+    @GetMapping(value = "/{message}", produces = "text/html")
+    public String publish(@PathVariable("message") final String message) {
+
+        Click click = new Click( );
+        click.setCount(11);
+        click.setName(message);
+        jmsTemplate.convertAndSend("music_player_queue", click);
+        return "Ok!";
     }
 }

@@ -17,7 +17,7 @@ public class ActiveMqConfig {
 
     @Bean
     public Queue createQueue() {
-        return new ActiveMQQueue("Standalone.queue");
+        return new ActiveMQQueue("music_player_queue");
     }
 
     @Bean
