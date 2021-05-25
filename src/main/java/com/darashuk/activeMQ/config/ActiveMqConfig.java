@@ -30,19 +30,20 @@ public class ActiveMqConfig {
     @Bean
     public MessageConverter jacksonJmsMessageConverter() {
         MappingJackson2MessageConverter messageConverter = new MappingJackson2MessageConverter();
+
         messageConverter.setTargetType(MessageType.TEXT);
         messageConverter.setTypeIdPropertyName("_type");
         return messageConverter;
     }
 
-    @Bean
-    public JmsListenerContainerFactory jsaFactory(ConnectionFactory connectionFactory,
-                                                  DefaultJmsListenerContainerFactoryConfigurer configurer) {
-        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
-        factory.setMessageConverter(jacksonJmsMessageConverter());
-        configurer.configure(factory, connectionFactory);
-        return factory;
-    }
+//    @Bean
+//    public JmsListenerContainerFactory jsaFactory(ConnectionFactory connectionFactory,
+//                                                  DefaultJmsListenerContainerFactoryConfigurer configurer) {
+//        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
+//        factory.setMessageConverter(jacksonJmsMessageConverter());
+//        configurer.configure(factory, connectionFactory);
+//        return factory;
+//    }
 
 //    @Bean
 //    public ActiveMQConnectionFactory createConnectionFactory() {
@@ -57,19 +58,31 @@ public class ActiveMqConfig {
 //    }
 
     @Bean
+    public JmsListenerContainerFactory<?> jsaFactory(ConnectionFactory connectionFactory,
+                                                     DefaultJmsListenerContainerFactoryConfigurer configurer) {
+        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
+        factory.setMessageConverter(jacksonJmsMessageConverter());
+        configurer.configure(factory, connectionFactory);
+        return factory;
+    }
+
+    @Bean
     public ConnectionFactory connectionFactory() {
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
         connectionFactory.setBrokerURL(brokerUrl);
         connectionFactory.setUserName("admin");
         connectionFactory.setPassword("admin");
+        connectionFactory.setTrustAllPackages(true);
         return connectionFactory;
     }
 
     @Bean
     public JmsTemplate jmsTemplate() {
         JmsTemplate template = new JmsTemplate();
-        template.setMessageConverter(jacksonJmsMessageConverter());
+        template.setMessageConverter(jacksonJmsMessageConverter());//
         template.setConnectionFactory(connectionFactory());
         return template;
     }
+
+
 }
