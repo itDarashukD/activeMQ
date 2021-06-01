@@ -1,5 +1,6 @@
 package com.darashuk.activeMQ.config;
 
+import com.darashuk.activeMQ.entity.Source;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
@@ -14,17 +15,24 @@ import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
 
 import javax.jms.ConnectionFactory;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableJms
 public class ActiveMqConfig {
 
-    @Value("${activemq.broker-url}")
-    private String brokerUrl;
+    //@Value("${activemq.broker-url}")
+    private String brokerUrl = "tcp://localhost:61616";
 
     @Bean
     public MessageConverter jacksonJmsMessageConverter() {
         MappingJackson2MessageConverter messageConverter = new MappingJackson2MessageConverter();
+
+        Map<String, Class<?>> typeIdMappings = new HashMap<String, Class<?>>();
+        typeIdMappings.put("JMS_TYPE", Source.class);
+        messageConverter.setTypeIdMappings(typeIdMappings);
+
         messageConverter.setTargetType(MessageType.TEXT);
         messageConverter.setTypeIdPropertyName("_type");
         return messageConverter;
