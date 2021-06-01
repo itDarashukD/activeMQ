@@ -2,7 +2,7 @@ package com.darashuk.activeMQ.config;
 
 import com.darashuk.activeMQ.entity.Source;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +14,7 @@ import org.springframework.jms.support.converter.MappingJackson2MessageConverter
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
 
-import javax.jms.ConnectionFactory;
+import javax.jms.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,6 +54,13 @@ public class ActiveMqConfig {
         connectionFactory.setUserName("admin");
         connectionFactory.setPassword("admin");
         connectionFactory.setTrustAllPackages(true);
+
+//        Connection connection = connectionFactory.createConnection();
+//        connection.start();
+//        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+//        Queue queue = new ActiveMQQueue("music_player_queue?consumer.exclusive=true");
+//        MessageConsumer consumer = session.createConsumer(queue);
+
         return connectionFactory;
     }
 
