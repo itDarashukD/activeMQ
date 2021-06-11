@@ -16,6 +16,8 @@
 		</repository>
 	</repositories>
 
+
+
 	<groupId>com.darashuk</groupId>
 	<artifactId>activeMQ</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -96,8 +98,24 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+
+				</configuration>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.devcolibri.core.Main</mainClass>
+						</manifest>
+					</archive>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
+<!--	<distributionManagement>-->
+<!--		<repository>-->
+<!--			<id>internal.repo</id>-->
+<!--			<name>Internal repo</name>-->
+<!--			<url>file:C:\Users\Dzmitry_Darashuk\Epam_MusicPlayer\activeMQ_project\activeMQ\activeMQ\</url>-->
+<!--		</repository>-->
+<!--	</distributionManagement>-->
 </project>
