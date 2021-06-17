@@ -26,7 +26,7 @@
 	<properties>
 		<java.version>11</java.version>
 
-		<start-class>com.xxx.yyy.MainClass</start-class>
+		<start-class>com.darashuk.activeMQ.ActiveMqApplication</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -100,12 +100,37 @@
 					</excludes>
 
 				</configuration>
+
+			</plugin>
+
+			<plugin>
+
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.36.0</version>
+
 				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>com.devcolibri.core.Main</mainClass>
-						</manifest>
-					</archive>
+					<verbose>true</verbose>
+					<images>
+						<image>
+							<name>itdarashukd/activmq_listener5</name>
+							<build>
+								<dockerFileDir>${project.basedir}</dockerFileDir>
+								<assembly>
+									<descriptorRef>artifact</descriptorRef>
+								</assembly>
+								<tags>
+									<tag>latest</tag>
+									<tag>${project.version}</tag>
+								</tags>
+							</build>
+							<run>
+								<ports>
+									<port>8081:8081</port>
+								</ports>
+							</run>
+						</image>
+					</images>
 				</configuration>
 			</plugin>
 		</plugins>

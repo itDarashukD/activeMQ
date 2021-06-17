@@ -1,0 +1,44 @@
+version: "3.7"
+services:
+  activemq:
+    image: webcenter/activemq
+    container_name: queue
+    ports:
+      - 8161:8161
+      - 61616:61616
+      - 61613:61613
+    healthcheck:
+      test: curl --fail http://localhost:61616 || echo 1
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    environment:
+      BROKER_URL: tcp://localhost:61616
+      ACTIVEMQ_REMOVE_DEFAULT_ACCOUNT: 'True'
+      ACTIVEMQ_NAME: music_player_queue
+      ACTIVEMQ_ADMIN_LOGIN: admin
+      ACTIVEMQ_ADMIN_PASSWORD: admin
+    volumes:
+      - ./data/activemq/data:/data/activemq
+      - ./data/activemq/log:/var/log/activemq
+    restart: always
+
+  app:
+    image: app_active_mq_listener:latest                      # from DF below created a new DI, but it not saving in DHub
+    container_name: app_active_mq_listener                    # for test work this app - normal, but to production, I must handmade DI and push it to DHub
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    healthcheck:
+      test: curl --fail http://activemq:61616 || echo 1
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - ./data/app_active_mq_listener/data:/data/app_active_mq_listener
+      - ./data/app_active_mq_listener/log:/var/log/app_active_mq_listener
+    restart: always
+    depends_on:
+      - activemq
+
+

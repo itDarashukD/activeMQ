@@ -3,6 +3,7 @@ package com.darashuk.activeMQ.config;
 import com.darashuk.activeMQ.entity.Source;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,8 +23,8 @@ import java.util.Map;
 @EnableJms
 public class ActiveMqConfig {
 
-    //@Value("${activemq.broker-url}")
-    private String brokerUrl = "tcp://localhost:61616";
+    @Value("${activemq.broker-url}")
+    private String brokerUrl ;
 
     @Bean
     public MessageConverter jacksonJmsMessageConverter() {
@@ -54,13 +55,6 @@ public class ActiveMqConfig {
         connectionFactory.setUserName("admin");
         connectionFactory.setPassword("admin");
         connectionFactory.setTrustAllPackages(true);
-
-//        Connection connection = connectionFactory.createConnection();
-//        connection.start();
-//        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-//        Queue queue = new ActiveMQQueue("music_player_queue?consumer.exclusive=true");
-//        MessageConsumer consumer = session.createConsumer(queue);
-
         return connectionFactory;
     }
 
@@ -71,44 +65,4 @@ public class ActiveMqConfig {
         template.setConnectionFactory(connectionFactory());
         return template;
     }
-
-    // config for Two listeners
-//    @Bean
-//    public ActiveMQConnectionFactory connectionFactory() {
-//        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
-//        connectionFactory.setBrokerURL(brokerUrl);
-//        connectionFactory.setPassword("admin");
-//        connectionFactory.setUserName("admin");
-//        connectionFactory.setUseCompression(true);
-//
-//        connectionFactory.setConnectionIDPrefix("DRR");
-//        connectionFactory.setUseAsyncSend(true);
-//        return connectionFactory;
-//    }
-//
-//    @Bean(name= "foo1")
-//    public DefaultJmsListenerContainerFactory foo1() {
-//        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
-//        factory.setConnectionFactory(connectionFactory());
-//        factory.setConcurrency("1-1");
-//        factory.setPubSubDomain(true);
-//        factory.setSubscriptionDurable(true);
-//
-//         connectionFactory().setClientID("FOO_1");
-//        return factory;
-//    }
-//
-//    @Bean(name= "foo2")
-//    public DefaultJmsListenerContainerFactory foo2() {
-//        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
-//        factory.setConnectionFactory(connectionFactory());
-//        factory.setConcurrency("1-1");
-//        factory.setPubSubDomain(true);
-//        factory.setSubscriptionDurable(true);
-//
-//         connectionFactory().setClientID("FOO_1");
-//        return factory;
-//    }
-
-
 }
