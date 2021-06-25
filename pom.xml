@@ -113,7 +113,7 @@
 					<verbose>true</verbose>
 					<images>
 						<image>
-							<name>itdarashukd/activmq_listener5</name>
+							<name>itdarashukd/activmq_listener6</name>
 							<build>
 								<dockerFileDir>${project.basedir}</dockerFileDir>
 								<assembly>
