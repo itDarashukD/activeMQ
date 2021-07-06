@@ -25,7 +25,7 @@ public class Song {
     @NotNull
     private Integer year;
 
-    private StorageTypes storageTypes;
+    private String storageTypes;
 
     public Song(Long album_id,String name, String notes, Integer year) {
             this.album_id = album_id;
@@ -34,7 +34,7 @@ public class Song {
         this.year = year;
     }
 
-    public Song(String name, String notes, Integer year, StorageTypes storageTypes) {
+    public Song(String name, String notes, Integer year, String storageTypes) {
         this.name = name;
         this.notes = notes;
         this.year = year;

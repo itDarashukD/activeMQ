@@ -19,7 +19,7 @@ public class WavToMp3ConversationService implements IWavToMp3ConversationService
     @Value("${temporaryDirectory}")
     private String temporaryDirectory;
 
-    public File executeConvetion(File fileToConvert) {
+    public File executeConversion(File fileToConvert) {
         log.info(" IN executeConvetion() : " + "fileToConvert : " + fileToConvert.getName() + " " + fileToConvert.getPath() + " " + fileToConvert.length());
         String newFilename = fileToConvert.getName().replace(".wav", ".mp3");
         log.info(" IN executeConvetion() : " + "newFilename : " + newFilename);

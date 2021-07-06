@@ -2,7 +2,6 @@ package com.darashuk.activeMQ.activeMQ;
 
 import com.darashuk.activeMQ.entity.Song;
 import com.darashuk.activeMQ.entity.Source;
-import com.darashuk.activeMQ.entity.StorageTypes;
 import com.darashuk.activeMQ.service.IWavToMp3ConversationService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -49,7 +48,7 @@ public class ListenerService implements IListenerService {
 
 
     public void getFileBySourceFromListener(Source sourceFromListener) {
-        StorageTypes storageTypes = sourceFromListener.getStorage_types();
+        String storageTypes = sourceFromListener.getStorage_types();
         String fileType = sourceFromListener.getFileType();
         nameFromSource = sourceFromListener.getName();
         song_id = sourceFromListener.getSong_id();
@@ -63,14 +62,10 @@ public class ListenerService implements IListenerService {
 
     public void writingArrayToFile() {
         try {
-//           String tempDir = System.getProperty("java.io.tmpdir");  //this for host application
-//            String temporaryDirectory = "./";                                 //this for host application, but don't tested
-//            String temporaryDirectory = "/data/app_active_mq_converter/";  //this for docker_application
-
             File file = new File(temporaryDirectory + nameFromSource);
             FileUtils.writeByteArrayToFile(new File(file.getAbsolutePath()), arrayFromWavFile);
             log.info(" IN writingArrayToFile() : " + file.getName() + " " + file.getAbsolutePath() + " " + file.length() + " " + file.getPath());
-            mp3File = wavToMp3ConversationService.executeConvetion(file);
+            mp3File = wavToMp3ConversationService.executeConversion(file);
             log.info(" IN writingArrayToFile() : " + mp3File.getName() + " " + mp3File.getAbsolutePath() + " " + mp3File.length() + " " + mp3File.getPath());
             saveMp3FileToStorages();
         } catch (IOException e) {

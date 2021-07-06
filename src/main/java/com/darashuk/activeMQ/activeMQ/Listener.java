@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class Listener {
+public class Listener  {
 
     @Autowired
     private IListenerService listenerService;

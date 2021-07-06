@@ -28,7 +28,7 @@ public class Source implements Serializable {
     @NotNull
     private String checksum;
     @NotNull
-    private StorageTypes storage_types;
+    private String  storage_types;
     @NotNull
     private String fileType;
 
@@ -40,7 +40,7 @@ public class Source implements Serializable {
         this.fileType = fileType;
     }
 
-    public Source(String name, StorageTypes storage_types, String fileType) {
+    public Source(String name, String storage_types, String fileType) {
         this.name = name;
         this.storage_types = storage_types;
         this.fileType = fileType;

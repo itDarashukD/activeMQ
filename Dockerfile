@@ -19,4 +19,3 @@ ADD target/*.jar app.jar
 ENTRYPOINT ["java", "-Dspring.profiles.active=docker","-jar","/app.jar"]
 EXPOSE 8081
 
-# "-Dactivemq.broker-url=tcp://activemq:61616",

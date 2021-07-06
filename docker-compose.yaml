@@ -21,14 +21,9 @@ services:
   app:
     image:  itdarashukd/app_listener1_ready_to_use:latest                     # from DF below created a new DI, but it not saving in DHub
     container_name: app_active_mq_listener                                    # for test work this app - normal, but to production, I must handmade DI and push it to DHub
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile
     volumes:
       - ./data/app_active_mq_listener/data:/data/app_active_mq_listener
       - ./data/app_active_mq_listener/log:/var/log/app_active_mq_listener
     restart: always
-#    depends_on:
-#      - activemq
 
 
