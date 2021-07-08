@@ -16,18 +16,17 @@
 		</repository>
 	</repositories>
 
-
-
 	<groupId>com.darashuk</groupId>
 	<artifactId>activeMQ</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>activeMQ</name>
 	<description>Demo project for Spring Boot ativeMQ</description>
+
 	<properties>
 		<java.version>11</java.version>
-
 		<start-class>com.darashuk.activeMQ.ActiveMqApplication</start-class>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -51,7 +50,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
@@ -73,6 +71,7 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.15</version>
 		</dependency>
+
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
@@ -85,7 +84,8 @@
 			<artifactId>jave</artifactId>
 			<version>1.0.8</version>
 		</dependency>
-    </dependencies>
+
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -99,13 +99,10 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
-
 				</configuration>
-
 			</plugin>
 
 			<plugin>
-
 				<groupId>io.fabric8</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>0.36.0</version>
@@ -136,12 +133,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-<!--	<distributionManagement>-->
-<!--		<repository>-->
-<!--			<id>internal.repo</id>-->
-<!--			<name>Internal repo</name>-->
-<!--			<url>file:C:\Users\Dzmitry_Darashuk\Epam_MusicPlayer\activeMQ_project\activeMQ\activeMQ\</url>-->
-<!--		</repository>-->
-<!--	</distributionManagement>-->
 </project>
